@@ -1,15 +1,4 @@
 import React from "react";
-import { gql } from "apollo-boost";
-import { graphql } from "react-apollo";
-
-const getBooksQuery = gql`
-  {
-    books {
-      name
-      id
-    }
-  }
-`;
 
 const Input = props => {
   //console.log(props);
@@ -32,4 +21,4 @@ const Input = props => {
   );
 };
 
-export default graphql(getBooksQuery)(Input);
+export default Input;

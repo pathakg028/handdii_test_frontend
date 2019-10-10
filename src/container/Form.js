@@ -11,24 +11,14 @@ class FormContainer extends Component {
     this.state = {
       newUser: {
         name: ""
-      }
+      },
+      latitude: "",
+      longitude: "",
+      submitted: false
     };
   }
 
   /* This lifecycle hook gets executed when the component mounts */
-
-  handleFullName = e => {
-    let value = e.target.value;
-    this.setState(
-      prevState => ({
-        newUser: {
-          ...prevState.newUser,
-          name: value
-        }
-      }),
-      () => console.log(this.state.newUser)
-    );
-  };
 
   handleInput = e => {
     let value = e.target.value;
@@ -44,11 +34,22 @@ class FormContainer extends Component {
     );
   };
 
-  handleFormSubmit = e => {
-    e.preventDefault();
-    let userData = this.state.newUser;
-
-    console.log(userData);
+  handleFormSubmit = async event => {
+    event.preventDefault();
+    let userData = this.state.newUser.name;
+    userData = userData.replace(/' '/, /'+'/);
+    let response = await fetch(
+      "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+        userData +
+        "&key=AIzaSyDDFxE089nlX0rL-OFgJq3o-xb0WKxZjwk"
+    );
+    const data = await response.json();
+    const location = data.results[0].geometry.location;
+    this.setState({
+      latitude: location.lat,
+      longitude: location.lng,
+      submitted: true
+    });
   };
 
   handleClearForm = e => {
@@ -61,15 +62,24 @@ class FormContainer extends Component {
   };
 
   render() {
+    let result = "";
+    if (this.state.submitted) {
+      result = (
+        <div>
+          <div>Latitude: {this.state.latitude}</div>
+          <div>Longitude: {this.state.longitude}</div>
+        </div>
+      );
+    }
     return (
-      <form className="container-fluid" onSubmit={this.handleFormSubmit}>
+      <form className="container-fluid">
         <Input
           inputtype={"text"}
           title={"Address"}
           name={"name"}
           value={this.state.newUser.name}
           placeholder={"Enter your name"}
-          handleChange={this.handleInput}
+          onChange={this.handleInput}
         />{" "}
         {/* About you */}
         <Button
@@ -77,6 +87,7 @@ class FormContainer extends Component {
           type={"primary"}
           title={"Submit"}
           style={buttonStyle}
+          onClick={this.handleFormSubmit}
         />{" "}
         {/*Submit */}
         <Button
@@ -86,6 +97,7 @@ class FormContainer extends Component {
           style={buttonStyle}
         />{" "}
         {/* Clear the form */}
+        {result}
       </form>
     );
   }
