@@ -1,6 +1,18 @@
 import React from "react";
 
-const Input = props => {
+interface InputProps {
+  inputtype: string;
+  title: string;
+  name: string;
+  action: any;
+  id: string;
+  type: string;
+  value: any;
+  handleChange: any;
+  placeholder: any;
+}
+
+const Input = (props: InputProps): any => {
   //console.log(props);
   return (
     <div className="form-group container">

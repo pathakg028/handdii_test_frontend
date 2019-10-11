@@ -1,6 +1,11 @@
 import React from "react";
-
-const Button = props => {
+interface ButtonProps {
+  title: String;
+  style: any;
+  type: String;
+  action: any;
+}
+const Button = (props: ButtonProps): any => {
   //console.log(props.style);
   return (
     <button

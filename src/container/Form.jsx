@@ -4,7 +4,19 @@ import React, { Component } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
 
+// const initialState = {
+//   newUser: {
+//     name: ""
+//   },
+//   latitude: "",
+//   longitude: "",
+//   submitted: false
+// };
+
+//type State = Readonly<typeof initialState>;
+
 class FormContainer extends Component {
+  // readonly state: State = initialState;
   constructor(props) {
     super(props);
 
@@ -17,8 +29,6 @@ class FormContainer extends Component {
       submitted: false
     };
   }
-
-  /* This lifecycle hook gets executed when the component mounts */
 
   handleInput = e => {
     let value = e.target.value;
@@ -38,6 +48,7 @@ class FormContainer extends Component {
     event.preventDefault();
     let userData = this.state.newUser.name;
     userData = userData.replace(/' '/, /'+'/);
+
     let response = await fetch(
       "https://maps.googleapis.com/maps/api/geocode/json?address=" +
         userData +
