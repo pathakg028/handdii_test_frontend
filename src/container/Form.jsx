@@ -47,6 +47,7 @@ class FormContainer extends Component {
   handleFormSubmit = async event => {
     event.preventDefault();
     let userData = this.state.newUser.name;
+    console.log(userData);
     userData = userData.replace(/' '/, /'+'/);
 
     let response = await fetch(
@@ -86,7 +87,7 @@ class FormContainer extends Component {
       <form className="container-fluid">
         <Input
           inputtype={"text"}
-          title={"Address"}
+          title={"Enter City"}
           name={"name"}
           value={this.state.newUser.name}
           placeholder={"Enter your name"}

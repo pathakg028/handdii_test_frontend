@@ -6,7 +6,9 @@ import FormContainer from "./container/Form";
 const App = () => (
   <div className="App">
     <NavBar />
-    <FormContainer />
+    <div className="mg-tp">
+      <FormContainer />
+    </div>
   </div>
 );
 

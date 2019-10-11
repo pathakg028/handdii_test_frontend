@@ -3,7 +3,7 @@ const NavBar = (): any => {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a href="true" className="navbar-brand">
+        <a href="false" className="navbar-brand">
           Handdii
         </a>
         <button
