@@ -1,14 +1,8 @@
 import React from "react";
 
-interface ButtonProps {
-  title: String;
-  style: any;
-  type: String;
-  action: any;
-}
-const Button = (props: ButtonProps): any => {
-  //console.log(props.style);
+const Button = props => {
   return (
+    // eslint-disable-next-line react/button-has-type
     <button
       style={props.style}
       className={
