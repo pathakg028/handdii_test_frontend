@@ -1,18 +1,6 @@
 import React from "react";
 
-interface InputProps {
-  inputtype: string;
-  title: string;
-  name: string;
-  action: any;
-  id: string;
-  type: string;
-  value: any;
-  handleChange: any;
-  placeholder: any;
-}
-
-const Input = (props: InputProps): any => {
+const Input = props => {
   //console.log(props);
   return (
     <div className="form-group container">
@@ -23,7 +11,7 @@ const Input = (props: InputProps): any => {
         className="form-control"
         id={props.name}
         name={props.name}
-        type={props.inputtype}
+        type={props.type}
         value={props.value}
         onChange={props.handleChange}
         placeholder={props.placeholder}

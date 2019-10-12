@@ -1,27 +1,13 @@
 import React, { Component } from "react";
-
-/* Import Components */
 import Input from "../components/Input";
 import Button from "../components/Button";
 
-// const initialState = {
-//   newUser: {
-//     name: ""
-//   },
-//   latitude: "",
-//   longitude: "",
-//   submitted: false
-// };
-
-//type State = Readonly<typeof initialState>;
-
 class FormContainer extends Component {
-  // readonly state: State = initialState;
   constructor(props) {
     super(props);
 
     this.state = {
-      newUser: {
+      city: {
         name: ""
       },
       latitude: "",
@@ -35,18 +21,18 @@ class FormContainer extends Component {
     let name = e.target.name;
     this.setState(
       prevState => ({
-        newUser: {
-          ...prevState.newUser,
+        city: {
+          ...prevState.city,
           [name]: value
         }
       }),
-      () => console.log(this.state.newUser)
+      () => console.log(this.state.city)
     );
   };
 
   handleFormSubmit = async event => {
     event.preventDefault();
-    let userData = this.state.newUser.name;
+    let userData = this.state.city.name;
     userData = userData.replace(/' '/, /'+'/);
 
     let response = await fetch(
@@ -66,7 +52,7 @@ class FormContainer extends Component {
   handleClearForm = e => {
     e.preventDefault();
     this.setState({
-      newUser: {
+      city: {
         name: ""
       }
     });
@@ -85,14 +71,13 @@ class FormContainer extends Component {
     return (
       <form className="container-fluid">
         <Input
-          inputtype={"text"}
-          title={"Address"}
+          type={"text"}
+          title={"Enter City"}
           name={"name"}
-          value={this.state.newUser.name}
+          value={this.state.city.name}
           placeholder={"Enter your name"}
           onChange={this.handleInput}
         />{" "}
-        {/* About you */}
         <Button
           action={this.handleFormSubmit}
           type={"primary"}
@@ -100,14 +85,12 @@ class FormContainer extends Component {
           style={buttonStyle}
           onClick={this.handleFormSubmit}
         />{" "}
-        {/*Submit */}
         <Button
           action={this.handleClearForm}
           type={"secondary"}
           title={"Clear"}
           style={buttonStyle}
         />{" "}
-        {/* Clear the form */}
         {result}
       </form>
     );
